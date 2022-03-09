@@ -78,16 +78,15 @@
  const styles = StyleSheet.create({
      container: {
          flex: 1,
-         backgroundColor: '#000',
-         alignItems: 'center',
-         justifyContent: 'center',
+         justifyContent: 'center'
      },
      submitButton: {
          backgroundColor: '#398677',
          padding: 13,
-         height: '70%',
+         height: 45,
          width: '40%',
          borderRadius: 7,
+         alignSelf: 'center'
      },
      submitButtonText: {
          color: 'white',
