@@ -44,26 +44,58 @@ export const getOSCInfoFail = (data:boolean): AppContainerActionTypes => {
 
 /** Login Api Call */
 export const getOSCInfo: ActionCreator<
-ThunkAction<
-  Promise<any>,
-  AppContainerState,
-  null,
-  AppContainerActionTypes
->
+  ThunkAction<
+    Promise<any>,
+    AppContainerState,
+    null,
+    AppContainerActionTypes
+  >
 > = () => {
-return (dispatch: Dispatch) => {
-  const service = new APIUserManagement();
-  dispatch(showHideLoader(true))
+  return (dispatch: Dispatch) => {
+    const service = new APIUserManagement();
+    dispatch(showHideLoader(true))
 
-  return service.getOSCInfo('http://192.168.42.1:80/osc/info').then(async (response) => {
-    dispatch(showHideLoader(false))
-    dispatch(getOSCInfoSuccess(true));
-  }).catch((error) => {
-    dispatch(showHideLoader(false))
-    dispatch(getOSCInfoFail(true));
-  });
+    return service.getOSCInfo().then(async (response) => {
+      dispatch(showHideLoader(false))
+      dispatch(getOSCInfoSuccess(true));
+    }).catch((error) => {
+      dispatch(showHideLoader(false))
+      dispatch(getOSCInfoFail(true));
+    });
+  }
 }
+
+/** Login Api Call */
+export const takePicture: ActionCreator<
+  ThunkAction<
+    Promise<any>,
+    AppContainerState,
+    null,
+    AppContainerActionTypes
+  >
+> = () => {
+  return (dispatch: Dispatch) => {
+    const service = new APIUserManagement();
+    dispatch(showHideLoader(true))
+
+    return service.takePicture().then(async (response) => {
+      return service.getStatus().then(async (response) => {      
+        dispatch(showHideLoader(false))
+        dispatch(getOSCInfoSuccess(true));
+      }).catch((error) => {
+        dispatch(showHideLoader(false))
+        dispatch(getOSCInfoFail(true));
+      });
+      
+      dispatch(showHideLoader(false))
+      dispatch(getOSCInfoSuccess(true));
+    }).catch((error) => {
+      dispatch(showHideLoader(false))
+      dispatch(getOSCInfoFail(true));
+    });
+  }
 }
+
 
 
 
