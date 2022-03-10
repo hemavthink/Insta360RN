@@ -20,3 +20,9 @@ export interface IGetOSCInfoFail {
     readonly getOSCInfoFail: boolean;
    
 }
+
+export interface IAppChangeFlag {
+    readonly type: keys.APP_CHANGE_FLAG;
+    readonly appChangeFlag: boolean;
+   
+}

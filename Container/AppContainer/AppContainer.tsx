@@ -9,11 +9,14 @@
  import React, { Component } from 'react';
  import { Text, StyleSheet, NativeModules, NativeEventEmitter, Platform, TouchableOpacity, View } from 'react-native';
  import { connect } from 'react-redux';
-import { getOSCInfo } from '../../core/AppContainer/Action/AppContainerAction';
+import { appChangeFlag, getOSCInfo } from '../../core/AppContainer/Action/AppContainerAction';
  import AppStore from '../../core/AppStore';
  
  interface AppProps{
     getOSCInfoFunc: any
+    appChangeFlagFunc: any
+    getOSCInfoSuccess: boolean,
+    getOSCInfoFail: boolean
  }
  
  interface AppState{
@@ -39,6 +42,12 @@ import { getOSCInfo } from '../../core/AppContainer/Action/AppContainerAction';
      componentWillUnmount() {
  
      }
+
+     componentDidUpdate(prevProps, prevState) {
+        if (this.props.getOSCInfoSuccess) {
+            this.props.appChangeFlagFunc()
+        }
+    }
  
      connectCamera = () => {
         this.props.getOSCInfoFunc()
@@ -99,15 +108,16 @@ import { getOSCInfo } from '../../core/AppContainer/Action/AppContainerAction';
  // Make data available on props
  const mapStateToProps = (store: AppStore) => {
      return {
-        
+        getOSCInfoSuccess: store.appContainerState.getOSCInfoSuccess,
+        getOSCInfoFail: store.appContainerState.getOSCInfoFail
      }
  }
  
  // Make functions available on props
  const mapDispatchToProps = (dispatch: any) => {
      return {
-        getOSCInfoFunc: () => dispatch(getOSCInfo())
-        
+        getOSCInfoFunc: () => dispatch(getOSCInfo()),
+        appChangeFlagFunc: () => dispatch(appChangeFlag())
      }
  }
  

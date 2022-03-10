@@ -18,6 +18,13 @@ export const showHideLoader = (data:boolean): AppContainerActionTypes => {
     };
 }
 
+export const appChangeFlag = (): AppContainerActionTypes => {
+  return {
+    type: AppContainerActionTypeKey.APP_CHANGE_FLAG,
+    appChangeFlag: true
+  }
+}
+
 export const getOSCInfoSuccess = (data:boolean): AppContainerActionTypes => {
   return {
       type: AppContainerActionTypeKey.GET_OSC_INFO_SUCCESS,

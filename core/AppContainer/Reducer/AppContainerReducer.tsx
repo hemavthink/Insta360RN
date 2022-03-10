@@ -6,7 +6,8 @@ import AppContainerActionTypeKey from '../Action/AppContainerActionTypeKey';
 const initialState: AppContainerState = {
     showLoader:false,
     getOSCInfoSuccess: false,
-    getOSCInfoFail: false
+    getOSCInfoFail: false,
+    appChangeFlag: false
 };
 
 const AppContainerReducer: Reducer<AppContainerState, AppContainerActionTypes> = (state = initialState, action) => {
@@ -27,6 +28,12 @@ const AppContainerReducer: Reducer<AppContainerState, AppContainerActionTypes> =
             return {
                 ...state,
                 getOSCInfoFail:action.getOSCInfoFail
+            };
+        }
+        case AppContainerActionTypeKey.APP_CHANGE_FLAG : {
+            return {
+                ...state,
+                appChangeFlag:action.appChangeFlag
             };
         }
         default:
