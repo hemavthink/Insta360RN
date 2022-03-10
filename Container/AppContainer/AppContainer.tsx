@@ -9,10 +9,11 @@
  import React, { Component } from 'react';
  import { Text, StyleSheet, NativeModules, NativeEventEmitter, Platform, TouchableOpacity, View } from 'react-native';
  import { connect } from 'react-redux';
+import { getOSCInfo } from '../../core/AppContainer/Action/AppContainerAction';
  import AppStore from '../../core/AppStore';
  
  interface AppProps{
-     
+    getOSCInfoFunc: any
  }
  
  interface AppState{
@@ -40,7 +41,7 @@
      }
  
      connectCamera = () => {
- 
+        this.props.getOSCInfoFunc()
      }
  
  
@@ -105,7 +106,8 @@
  // Make functions available on props
  const mapDispatchToProps = (dispatch: any) => {
      return {
-         
+        getOSCInfoFunc: () => dispatch(getOSCInfo())
+        
      }
  }
  

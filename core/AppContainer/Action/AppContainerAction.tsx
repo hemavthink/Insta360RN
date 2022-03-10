@@ -18,23 +18,39 @@ export const showHideLoader = (data:boolean): AppContainerActionTypes => {
     };
 }
 
+export const getOSCInfoSuccess = (data:boolean): AppContainerActionTypes => {
+  return {
+      type: AppContainerActionTypeKey.GET_OSC_INFO_SUCCESS,
+      getOSCInfoSuccess: data
+  };
+}
+
+
+export const getOSCInfoFail = (data:boolean): AppContainerActionTypes => {
+  return {
+      type: AppContainerActionTypeKey.GET_OSC_INFO_FAIL,
+      getOSCInfoFail: data
+  };
+}
+
 
 
 /** Login Api Call */
-export const actionLogin: ActionCreator<
+export const getOSCInfo: ActionCreator<
 ThunkAction<
   Promise<any>,
   AppContainerState,
   null,
   AppContainerActionTypes
 >
-> = (data: any , loginurl:any, userLoginKey: string) => {
+> = () => {
 return (dispatch: Dispatch) => {
   const service = new APIUserManagement();
   dispatch(showHideLoader(true))
 
-  return service.userLogin(data,loginurl).then(async (response) => {
-    
+  return service.getOSCInfo('http://192.168.42.1:80/osc/info').then(async (response) => {
+    dispatch(showHideLoader(false))
+    dispatch(getOSCInfoSuccess(true));
   }).catch((error) => {
     
   });
