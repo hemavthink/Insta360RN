@@ -59,7 +59,8 @@ return (dispatch: Dispatch) => {
     dispatch(showHideLoader(false))
     dispatch(getOSCInfoSuccess(true));
   }).catch((error) => {
-    
+    dispatch(showHideLoader(false))
+    dispatch(getOSCInfoFail(true));
   });
 }
 }
